@@ -67,8 +67,25 @@ userSchema.methods.genarateAccessToken = function () {
             username: this.username,
             fullName: this.fullName
         },
-        process.env.JWT_ACCESS_SECRET
+        process.env.JWT_ACCESS_SECRET,
+        {
+            expiresIn: process.env.ACCESS_TOKEN_EXPIRES_IN
+        }
     )
 }
+
+userSchema.methods.genarateRefreshToken = function () {
+    return jwt.sign(
+        {
+            _id: this._id
+        },
+        process.env.JWT_REFRESH_SECRET,
+        {
+            expiresIn: process.env.REFRESH_TOKEN_EXPIRES_IN
+        }
+    )
+}
+
+
 
 export const User = mongoose.model("User", userSchema);
