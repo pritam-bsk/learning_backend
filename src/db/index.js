@@ -8,7 +8,7 @@ export const connectDB = async () => {
         console.log(`MONGODB connected | HOST: ${connectionInst.connection.host}`);
     } catch (error) {
         console.log("MONGODB connection FAILED ", error);
-        process.exit(1)
+        process.exit(1);
     }
 }
 

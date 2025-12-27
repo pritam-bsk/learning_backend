@@ -18,10 +18,10 @@ router.route("/register").post(
     ]),
     registerUser);
 
-router.route("/login").post(upload.none(),loginUser);
+router.route("/login").post(loginUser);
 
 //sequired route
 router.route("/logout").post(verifyJWT,logoutUser)
-router.route("/refresh-access-token").post(upload.none(),loginUser)
+router.route("/refresh-access-token").post(loginUser)
 
 export default router;

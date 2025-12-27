@@ -145,7 +145,7 @@ const refreshAccessToken = asyncHandler(async function (req, res) {
         throw new ApiError(401, "refresh token did not match");
     }
 
-    const {accessToken, newRefreshToken} = await user.genarateRefreshAndAccessToken();
+    const { newAccessToken, newRefreshToken } = await user.genarateRefreshAndAccessToken();
 
 
     const options = {
@@ -155,10 +155,10 @@ const refreshAccessToken = asyncHandler(async function (req, res) {
 
     return res
         .status(200)
-        .cookie("accessToken", accessToken, options)
+        .cookie("accessToken", newAccessToken, options)
         .cookie("refreshToken", newRefreshToken, options)
         .json(
-            new ApiResponse(200, { accessToken, refreshToken: newRefreshToken }, "Access token refreshed successfully")
+            new ApiResponse(200, { accessToken: newAccessToken, refreshToken: newRefreshToken }, "Access token refreshed successfully")
         )
 })
 
